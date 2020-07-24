@@ -63,3 +63,8 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+.ionide
+.DS_Store
+.firebaserc
+firebase.json
