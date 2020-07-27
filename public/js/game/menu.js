@@ -60,15 +60,15 @@ export class Menu {
         const menuRow = document.createElement("div");
         menuRow.classList.add("row");
         
-        for (var i = 1; i < 40; i++) {
-            menuRow.appendChild(this.createMenuElement("Level " + i));
+        for (var i = 1; i < 3; i++) {
+            menuRow.appendChild(this.createMenuElement("Game " + i));
         }
         this.menu.appendChild(menuRow);
     }
 
     createMenuElement(titleText) {
         const menuCol = document.createElement("div");
-        menuCol.classList.add("col-4", "math-menu-card");
+        menuCol.classList.add("col-6", "math-menu-card");
 
         const card = document.createElement("div");
         card.classList.add("card");

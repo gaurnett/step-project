@@ -23,8 +23,8 @@ export class Question {
      */
 
     questionContainer = document.createElement("div");
-    questionNumber = document.createElement("h2");
-    mathQuestion = document.createElement("h5");
+    mathQuestion = document.createElement("h4");
+    image = document.createElement("img");
 
     constructor() {
         this.questionContainer.classList.add(
@@ -38,13 +38,17 @@ export class Question {
         const questionForm = document.createElement("form");
         questionForm.classList.add("col-4","text-center", "white-background");
 
-        questionForm.append(this.questionNumber, this.mathQuestion);
+        const questionTitle = document.createElement("h1");
+        questionTitle.innerText = "1 Pic 1 Word"
+        this.image.classList.add("question-image");
+
+        questionForm.append(questionTitle, this.mathQuestion, this.image);
         questionRow.appendChild(questionForm);
         this.questionContainer.appendChild(questionRow);
     }
 
-    setQuestionNumber(number) {
-        this.questionNumber.innerText = "Question " + number;
+    setImageURL(url) {
+        this.image.src = url
     }
 
     setQuestion(question) {

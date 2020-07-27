@@ -11,13 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-handlers:
-- name: lang_welcome
-- name: lang_instructions
-- name: lang_fallback
-- name: lang_start_one_pic
-- name: lang_start_vocab
-- name: lang_one_pic_word
-- name: lang_change_game
-httpsEndpoint:
-  baseUrl: 'https://us-central1-gaurnett-aog-game-e3c26.cloudfunctions.net/ActionsOnGoogleFulfillment'
+onEnter:
+  webhookHandler: lang_one_pic_welcome
+intentEvents:
+- handler:
+    webhookHandler: lang_change_game
+  intent: lang_change_game
+  transitionToScene: lang_menu
+- handler:
+    webhookHandler: lang_one_pic_word
+  intent: lang_one_pic_word
+  transitionToScene: lang_one_pic

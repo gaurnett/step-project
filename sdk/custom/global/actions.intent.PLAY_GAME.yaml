@@ -12,5 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 handler:
-  webhookHandler: welcome
-transitionToScene: Game
+  webhookHandler: lang_welcome
+transitionToScene: lang_menu

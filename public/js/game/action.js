@@ -26,29 +26,16 @@ export class Action {
       this.canvas = window.interactiveCanvas;
       this.scene = scene;
       this.commands = {
-        TINT: (data) => {
-          this.scene.sprite.tint = data.tint;
-        },
         QUESTIONS: (data) => {
             this.scene.openMenu();
         },
-        LEVEL: (data) => {
-            this.scene.openQuestion(data.level);
-        },
-        SPIN: (data) => {
-          this.scene.sprite.spin = data.spin;
-        },
-        RESTART_GAME: (data) => {
-          this.scene.button.texture = this.scene.button.textureButton;
-          this.scene.sprite.spin = true;
-          this.scene.sprite.tint = 0x00FF00; // green
-          this.scene.sprite.rotation = 0;
+        LANG_START_ONE_PIC: (data) => {
+            console.log("LEVEL " + data);
+            this.scene.startOnePicOneWord(data);
         },
       };
-      this.commands.TINT.bind(this);
-      this.commands.SPIN.bind(this);
-      this.commands.LEVEL.bind(this);
-      this.commands.RESTART_GAME.bind(this);
+      this.commands.LANG_START_ONE_PIC.bind(this);
+      this.commands.QUESTIONS.bind(this);
     }
   
     /**

@@ -13,21 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-html {
-    display: flex;
+html, body {
     height: 100%;
-}
-
-body {
-    display: flex;
-    flex: 1;
-    background-color: #fff;
-}
-
-.view {
-    position: relative;
-    flex: 1;
 }
 
 canvas {
@@ -36,14 +23,12 @@ canvas {
 }
 
 #game {
-    width: 100vh;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 }
 
 #math-menu {
     margin-top: 152px;
-    width: 100vh;
-    height: 100vh;
 }
 
 .math-menu-card {
@@ -56,4 +41,10 @@ canvas {
 
 .white-background {
     background-color: #fff;
+}
+
+.question-image {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
 }

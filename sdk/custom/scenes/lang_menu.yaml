@@ -11,10 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-trainingPhrases:
-- pause spin
-- idle
-- pause
-- stop
-- stop spinning
-- pause spinning
+intentEvents:
+- handler:
+    webhookHandler: lang_start_one_pic
+  intent: lang_start_one_pic
+  transitionToScene: lang_one_pic
+- handler:
+    webhookHandler: lang_start_vocab
+  intent: lang_start_vocab
+  transitionToScene: lang_vocab
+- handler:
+    webhookHandler: lang_instructions
+  intent: lang_instructions
+  transitionToScene: lang_menu
