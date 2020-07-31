@@ -13,10 +13,6 @@
 # limitations under the License.
 intentEvents:
 - handler:
-    webhookHandler: lang_start_one_pic
-  intent: lang_start_one_pic
-  transitionToScene: lang_one_pic
-- handler:
     webhookHandler: lang_start_vocab
   intent: lang_start_vocab
   transitionToScene: lang_vocab
@@ -24,3 +20,7 @@ intentEvents:
     webhookHandler: lang_instructions
   intent: lang_instructions
   transitionToScene: lang_menu
+- handler:
+    webhookHandler: 
+  intent: lang_start_one_pic
+  transitionToScene: lang_one_pic

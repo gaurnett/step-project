@@ -18,6 +18,10 @@ handlers:
 - name: lang_start_one_pic
 - name: lang_start_vocab
 - name: lang_one_pic_word
+- name: lang_one_pic_word_translation
+- name: lang_one_pic_next_question
 - name: lang_change_game
+- name: create_user
+- name: system_error
 httpsEndpoint:
   baseUrl: 'https://us-central1-gaurnett-aog-game-e3c26.cloudfunctions.net/ActionsOnGoogleFulfillment'

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 onEnter:
-  webhookHandler: lang_one_pic_welcome
+  webhookHandler: lang_start_one_pic
 intentEvents:
 - handler:
     webhookHandler: lang_change_game
@@ -22,3 +22,8 @@ intentEvents:
     webhookHandler: lang_one_pic_word
   intent: lang_one_pic_word
   transitionToScene: lang_one_pic
+- handler:
+    webhookHandler: lang_one_pic_next_question
+  intent: lang_one_pic_next_question
+  transitionToScene: lang_one_pic
+  

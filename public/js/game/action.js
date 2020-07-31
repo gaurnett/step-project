@@ -30,11 +30,19 @@ export class Action {
             this.scene.openMenu();
         },
         LANG_START_ONE_PIC: (data) => {
-            console.log("LEVEL " + data);
+            console.log("Starting One Pic")
             this.scene.startOnePicOneWord(data);
+        },
+        LANG_ONE_PIC_SHOW_ENGLISH: (data) => {
+            this.scene.onePicOneWordShowEnglish(data);
+        },
+        LANG_ONE_PIC_SHOW_SPANISH: (data) => {
+            this.scene.onePicOneWordShowSpanish(data);
         },
       };
       this.commands.LANG_START_ONE_PIC.bind(this);
+      this.commands.LANG_ONE_PIC_SHOW_ENGLISH.bind(this);
+      this.commands.LANG_ONE_PIC_SHOW_SPANISH.bind(this);
       this.commands.QUESTIONS.bind(this);
     }
   

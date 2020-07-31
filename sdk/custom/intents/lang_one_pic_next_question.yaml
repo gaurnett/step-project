@@ -11,20 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-accountLinking:
-  enableAccountCreation: true
-  linkingType: GOOGLE_SIGN_IN
-category: GAMES_AND_TRIVIA
-defaultLocale: en
-localizedSettings:
-  developerEmail:
-  developerName:
-  displayName: Gaurnett AOG Game
-  fullDescription:
-  privacyPolicyUrl:
-  pronunciation: Gaurnett AOG Game
-  shortDescription:
-  smallLogoImage:
-  termsOfServiceUrl:
-projectId: gaurnett-aog-game-e3c26
-usesInteractiveCanvas: true
+trainingPhrases:
+- next question
+- next
+- go to next questions
+- new picture

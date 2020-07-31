@@ -13,8 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-html, body {
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+/* 
+    Size of Nest Hub:
+    Width: 1280px
+    Height: 800px
+*/
+
+html,
+body {
     height: 100%;
+}
+
+h1 {
+    font-family: "Roboto Slab", serif;
 }
 
 canvas {
@@ -36,7 +49,7 @@ canvas {
 }
 
 .card-title {
-    margin-top: .75rem;
+    margin-top: 0.75rem;
 }
 
 .white-background {
@@ -44,7 +57,23 @@ canvas {
 }
 
 .question-image {
-    width: 100%;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     object-fit: contain;
+}
+
+.right-align {
+    text-align: end;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.next-question {
+    margin-top: 42px;
 }

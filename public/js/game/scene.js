@@ -18,7 +18,7 @@
  * Represent Triangle scene
  */
 import { Menu } from "./menu.js";
-import { Question } from "./question.js";
+import { OnePicOneWord } from "./one_pic_one_word.js";
 
 export class Scene {
     /**
@@ -26,7 +26,7 @@ export class Scene {
      */
     game = document.getElementById("game");
     menu = new Menu();
-    question = new Question();
+    question = new OnePicOneWord();
 
     constructor() {
         this.createBox();
@@ -34,14 +34,42 @@ export class Scene {
     }
 
     startOnePicOneWord(data) {
-        this.game.removeChild(this.menu.getMenu());
-        this.question.setQuestion(data.analysis.word);
+        if (this.game.contains(this.menu.getMenu()))
+            this.game.removeChild(this.menu.getMenu());
+        
+        const analysisWord = String(data.analysis.word)
+        var englishWord = `English ${analysisWord} : `
+        for(var i = 0; i < analysisWord.length; i++) {
+            englishWord += "_ "
+        }
+
+        this.question.hideSpanishWord()
+        this.question.setWord(englishWord);
         this.question.setImageURL(data.analysis.url);
-        this.game.appendChild(this.question.getQuestion());
+        this.game.appendChild(this.question.getWord());
+    }
+
+    onePicOneWordShowEnglish(data) {
+        var englishWord = `English : ${data.word}`
+        this.question.setWord(englishWord);
+
+        this.question.showSpanishWord()
+        var spanishWord = `Spanish : `
+        for(var i = 0; i < 8; i++) {
+            spanishWord += "_ "
+        }
+        this.question.setSpanishWord(spanishWord);
+    }
+
+    onePicOneWordShowSpanish(data) {
+        const translatedWord = String(data.word)
+        this.question.showSpanishWord()
+        var spanishWord = `Spanish : ${translatedWord}`
+        this.question.setSpanishWord(spanishWord);
     }
 
     openMenu() {
-        this.game.removeChild(this.question.getQuestion());
+        this.game.removeChild(this.question.getWord());
         this.game.appendChild(this.menu.getMenu());
     }
 
@@ -71,27 +99,10 @@ export class Scene {
         );
 
         var boxes = [];
-        // #4285F4
-        // #DB4437
-        // #F4B400
-        // #0F9D58
-        boxes.push(this.drawBox("rect", "0x4285F4", -280, -150, 125, 125));
-        boxes.push(this.drawBox("circle", "0xDB4437", 280, -180, 70, 0));
-        boxes.push(this.drawBox("ellipse", "0xF4B400", -280, 130, 90, 60));
-        boxes.push(this.drawBox("rect", "0x0F9D58", 230, 120, 160, 110));
-        boxes.push(this.drawBox("line", "0xE91E63", 0, 0, 125, 90));
-        // boxes.push(this.drawBox("circle", "0xF44336", 50, -90, 20, 0));
-        // boxes.push(this.drawBox("rect", "0xE91E63", 100, -50, 30, 30));
-        // boxes.push(this.drawBox("ellipse", "0x9C27B0", -80, -10, 30, 20));
-        // boxes.push(this.drawBox("circle", "0x2196F3", 50, 100, 15, 0));
-        // boxes.push(this.drawBox("rect", "0x4CAF50", -150, -100, 20, 20));
-        // boxes.push(this.drawBox("ellipse", "0xFF9800", 50, 40, 20, 12));
-
-        // boxes.push(this.drawBox("circle", "0x607D8B", -180, -30, 10, 0));
-        // boxes.push(this.drawBox("rect", "0x795548", -180, 70, 40, 20));
-        // boxes.push(this.drawBox("ellipse", "0xCDDC39", 180, 70, 25, 15));
-        // boxes.push(this.drawBox("circle", "0x009688", 180, -90, 5, 0));
-        // boxes.push(this.drawBox("rect", "0xFF5722", 180, 0, 30, 15));
+        boxes.push(this.drawBox("rect", "0x4285F4", -280, -150, 200, 200));
+        boxes.push(this.drawBox("circle", "0xDB4437", 280, -180, 110, 0));
+        boxes.push(this.drawBox("rect", "0x0F9D58", 230, 120, 220, 140));
+        boxes.push(this.drawBox("line", "0xF4B400", -240, 70, 125, 90));
 
         let last = performance.now();
         // frame-by-frame animation function
@@ -125,10 +136,8 @@ export class Scene {
             shape.drawEllipse(25, 25, width, height);
         } else if (type == "line") {
             shape.lineStyle(10, color, 1);
-            shape.pivot.set(0, 140);
-            shape.rotation = 0.785398;
             shape.moveTo(5, 0);
-            shape.lineTo(5, 200);
+            shape.lineTo(5, 250);
         }
 
         shape.endFill();

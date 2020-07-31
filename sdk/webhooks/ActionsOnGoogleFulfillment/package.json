@@ -14,6 +14,8 @@
     "actions-on-google": "^2.12.0",
     "firebase-admin": "~8.12.1",
     "firebase-functions": "^3.6.2",
+    "lorem-picsum": "^1.0.0",
+    "node-pexels": "0.0.5",
     "unsplash-js": "^6.0.0"
   }
 }
