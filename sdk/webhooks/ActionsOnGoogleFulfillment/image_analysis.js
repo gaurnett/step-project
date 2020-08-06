@@ -1,39 +1,21 @@
 const vision = require("@google-cloud/vision");
 const fetch = require("node-fetch");
 global.fetch = fetch;
-const Unsplash = require("unsplash-js").default;
-const toJson = require("unsplash-js").toJson;
-const Client = require("node-pexels").Client;
+const axios = require("axios");
 
-const config = require("./config");
-
-const pexels = new Client(config.keys.pexels);
-const unsplash = new Unsplash({
-    accessKey: config.keys.unsplash,
-});
-
+/**
+ * Fetches and image from unsplash and then analyses it to get
+ * words that the image represents.
+ */
 exports.imageAnalysis = async function imageAnalysis() {
-    const pexelImageURL = await pexels
-        .search("people", 5, 1)
-        .then((results) => {
-            console.log(results);
-            if (results.photos.length > 0) {
-                const photo = results.photos[0];
-                const source = "medium";
+    const picsumURL = "https://source.unsplash.com/random/500x500";
 
-                return photo.src.medium
-            } else {
-                throw new Error("no results found");
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    const photoURL = await axios.get(picsumURL).then((response) => {
+        return `https://images.unsplash.com${response.request.path}`;
+    });
 
     const client = new vision.ImageAnnotatorClient();
-    const [result] = await client.labelDetection(`${pexelImageURL}`);
+    const [result] = await client.labelDetection(`${photoURL}`);
     const labels = result.labelAnnotations;
-    labels.forEach((label) => console.log(label.description));
-
-    return { url: pexelImageURL, word: labels[0].description };
+    return { url: photoURL, word: labels[0].description };
 };

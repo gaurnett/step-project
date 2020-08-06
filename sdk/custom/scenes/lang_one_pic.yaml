@@ -21,7 +21,6 @@ intentEvents:
 - handler:
     webhookHandler: lang_one_pic_word
   intent: lang_one_pic_word
-  transitionToScene: lang_one_pic
 - handler:
     webhookHandler: lang_one_pic_next_question
   intent: lang_one_pic_next_question

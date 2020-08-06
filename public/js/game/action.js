@@ -26,11 +26,10 @@ export class Action {
       this.canvas = window.interactiveCanvas;
       this.scene = scene;
       this.commands = {
-        QUESTIONS: (data) => {
+        LANG_MENU: (data) => {
             this.scene.openMenu();
         },
         LANG_START_ONE_PIC: (data) => {
-            console.log("Starting One Pic")
             this.scene.startOnePicOneWord(data);
         },
         LANG_ONE_PIC_SHOW_ENGLISH: (data) => {
@@ -43,7 +42,7 @@ export class Action {
       this.commands.LANG_START_ONE_PIC.bind(this);
       this.commands.LANG_ONE_PIC_SHOW_ENGLISH.bind(this);
       this.commands.LANG_ONE_PIC_SHOW_SPANISH.bind(this);
-      this.commands.QUESTIONS.bind(this);
+      this.commands.LANG_MENU.bind(this);
     }
   
     /**

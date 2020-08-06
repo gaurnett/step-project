@@ -18,10 +18,10 @@ const { conversation, Canvas } = require("@assistant/conversation");
 const functions = require("firebase-functions");
 const translation = require("./translation");
 const imageAnalysis = require("./image_analysis");
-const gameState = require("./lang_game_state");
 const config = require("./config");
 const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
 const admin = require("firebase-admin");
+const { firestore } = require("firebase-admin");
 admin.initializeApp();
 const auth = admin.auth();
 const db = admin.firestore();
@@ -31,8 +31,7 @@ const dbs = {
 };
 
 const INSTRUCTIONS =
-    "Hello user, Do you want me to change color or pause spinning? " +
-    "You can also tell me to ask you later.";
+    "Hello user, you can open a new level or change questions.";
 
 // The Client Id of the Actions Project (set it in the env file).
 const CLIENT_ID = config.keys.clientID;
@@ -67,6 +66,9 @@ app.handle("system_error", async (conv) => {
     conv.session.params.AccountLinkingSlot = "";
 });
 
+/**
+ * Welcomes the user to the language section of the app.
+ */
 app.handle("lang_welcome", (conv) => {
     if (!conv.device.capabilities.includes("INTERACTIVE_CANVAS")) {
         conv.add("Sorry, this device does not support Interactive Canvas!");
@@ -74,15 +76,33 @@ app.handle("lang_welcome", (conv) => {
         return;
     }
     conv.add(
-        "Hi, Welcome to the AOG Education language section. Please choose between Game 1 or Game 2."
+        "Hi, Welcome to the AOG Education language section. Please choose a game from the menu below."
     );
     conv.add(
         new Canvas({
             url: `https://gaurnett-aog-game-e3c26.web.app`,
         })
     );
+    console.log("AOG User Params = " + conv.user.params);
+    console.log("AOG User ID = " + conv.user.params.uid);
+    console.log("AOG User ID = " + conv.user.params.tokenPayload.given_name);
+    
+    const firestoreUser = admin
+        .firestore()
+        .doc(`AOGUsers/${conv.user.params.uid}`);
+
+    firestoreUser.set(
+        {
+            TranslatedWordss: admin.firestore.FieldValue.arrayUnion({
+                english: "sky is the limit",
+                spanish: "cielo"
+            })
+        }, { merge: true });
 });
 
+/**
+ * Fallback handler for when an input is not matched
+ */
 app.handle("lang_fallback", (conv) => {
     conv.add(
         `I don't understand. You can open a new level or change questions.`
@@ -90,14 +110,25 @@ app.handle("lang_fallback", (conv) => {
     conv.add(new Canvas());
 });
 
+/**
+ * Handler to start the language one pic one word section
+ */
 app.handle("lang_start_one_pic", (conv) => {
-    console.log("Here in start one pic");
+    if (
+        conv.user.params.startedOnePic == undefined ||
+        conv.user.params.startedOnePic == false
+    ) {
+        conv.add(`Ok, starting one pic one word`);
+        conv.add(
+            `To play this game, please guess the english word shown by the picture.`
+        );
+        conv.user.params.startedOnePic = true;
+    }
+
     return imageAnalysis
         .imageAnalysis()
         .then((value) => {
-            gameState.game_state.one_pic_answer = value.word;
-
-            conv.add(`Ok, starting one pic one word`);
+            conv.user.params.onePicAnswer = value.word;
             conv.add(
                 new Canvas({
                     data: {
@@ -112,6 +143,9 @@ app.handle("lang_start_one_pic", (conv) => {
         });
 });
 
+/**
+ * Handler to manage the word the user guesses
+ */
 app.handle("lang_one_pic_word", (conv) => {
     const word = conv.intent.params.word
         ? conv.intent.params.word.resolved
@@ -119,7 +153,7 @@ app.handle("lang_one_pic_word", (conv) => {
 
     conv.add(`Ok, let's see if ${word} is correct`);
 
-    const correctAnswer = gameState.game_state.one_pic_answer;
+    const correctAnswer = conv.user.params.onePicAnswer;
     const userAnswer = String(word);
 
     if (userAnswer.toLowerCase() == correctAnswer.toLowerCase()) {
@@ -139,13 +173,16 @@ app.handle("lang_one_pic_word", (conv) => {
     }
 });
 
+/**
+ * Handler to manage to spanish input from the user
+ */
 app.handle("lang_one_pic_word_translation", (conv) => {
     const word = conv.intent.params.word
         ? conv.intent.params.word.resolved
         : null;
 
     conv.add(`Ok, let's see if ${word} is correct`);
-    const correctAnswer = gameState.game_state.one_pic_answer;
+    const correctAnswer = conv.user.params.onePicAnswer;
     return translation
         .translateFunction(correctAnswer)
         .then((value) => {
@@ -172,12 +209,19 @@ app.handle("lang_one_pic_word_translation", (conv) => {
         });
 });
 
+/**
+ * Handler to start the next question
+ */
 app.handle("lang_one_pic_next_question", (conv) => {
     conv.add(`Ok, starting next question`);
     conv.scene.next.name = "lang_one_pic";
 });
 
+/**
+ * Handler to return to the main menu
+ */
 app.handle("lang_change_game", (conv) => {
+    conv.user.params.startedOnePic = false;
     conv.add(`Ok, opening questions.`);
     conv.add(
         new Canvas({

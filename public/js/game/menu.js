@@ -60,9 +60,9 @@ export class Menu {
         const menuRow = document.createElement("div");
         menuRow.classList.add("row");
         
-        for (var i = 1; i < 3; i++) {
-            menuRow.appendChild(this.createMenuElement("Game " + i));
-        }
+        menuRow.appendChild(this.createMenuElement("One Pic One Word"));
+        menuRow.appendChild(this.createMenuElement("One Pic Multiple Words"));
+        menuRow.appendChild(this.createMenuElement("Vocabulary"));
         this.menu.appendChild(menuRow);
     }
 
