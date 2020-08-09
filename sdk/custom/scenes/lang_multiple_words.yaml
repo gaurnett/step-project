@@ -11,20 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+onEnter:
+  webhookHandler: lang_start_multiple_words
 intentEvents:
 - handler:
-    webhookHandler: lang_start_vocab
-  intent: lang_start_vocab
-  transitionToScene: lang_vocab
-- handler:
-    webhookHandler: lang_instructions
-  intent: lang_instructions
+    webhookHandler: lang_change_game
+  intent: lang_change_game
   transitionToScene: lang_menu
 - handler:
-    webhookHandler: 
-  intent: lang_start_one_pic
-  transitionToScene: lang_one_pic
+    webhookHandler: lang_word
+  intent: lang_word
 - handler:
-    webhookHandler: 
-  intent: lang_start_multiple_words
+    webhookHandler: lang_next_question
+  intent: lang_next_question
   transitionToScene: lang_multiple_words
+  

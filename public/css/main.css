@@ -74,6 +74,24 @@ canvas {
     display: none;
 }
 
-.next-question {
-    margin-top: 42px;
+.hide-with-space {
+    visibility: hidden;
+}
+
+.one-pic-language-heading {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.pic-table {
+    table-layout: fixed;
+}
+
+.game-heading {
+    font-size: 24px;
+}
+
+.language-heading {
+    font-size: 16px;
 }

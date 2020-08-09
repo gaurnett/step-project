@@ -11,14 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-parameters:
-- name: word
-  type:
-    name: word
 trainingPhrases:
-- ($word 'ten' auto=true)
-- ($word 'blue' auto=true)
-- ($word 'road' auto=true)
-- ($word 'car' auto=true)
-- ($word 'house' auto=true)
-- ($word 'pencil' auto=true)
+- start one pic multiple words
+- start one pic multiple words game
+- one pic multiple words
+- game 2
+- game two

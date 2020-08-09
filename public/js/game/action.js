@@ -27,21 +27,46 @@ export class Action {
       this.scene = scene;
       this.commands = {
         LANG_MENU: (data) => {
-            this.scene.openMenu();
+            this.scene.openMenu(data.value);
         },
         LANG_START_ONE_PIC: (data) => {
-            this.scene.startOnePicOneWord(data);
+            this.scene.startOnePicOneWord(data.value);
         },
         LANG_ONE_PIC_SHOW_ENGLISH: (data) => {
-            this.scene.onePicOneWordShowEnglish(data);
+            this.scene.onePicOneWordShowEnglish(data.value);
         },
         LANG_ONE_PIC_SHOW_SPANISH: (data) => {
-            this.scene.onePicOneWordShowSpanish(data);
+            this.scene.onePicOneWordShowSpanish(data.value);
         },
+        LANG_ONE_PIC_UPDATE_ATTEMPTS: (data) => {
+            this.scene.updateOnePicAttempts(data.value);
+        },
+        LANG_ONE_PIC_SHOW_ANSWER: (data) => {
+            this.scene.showOnePicAnswer(data.value);
+        },
+        LANG_START_MULTIPLE_WORDS: (data) => {
+            this.scene.startOnePicMultipleWords(data.value);
+        },
+        LANG_MULTIPLE_WORDS_SHOW_ENGLISH: (data) => {
+            this.scene.onePicMultipleWordShowEnglish(data.value);
+        },
+        LANG_MULTIPLE_WORDS_SHOW_SPANISH: (data) => {
+            this.scene.onePicMultipleWordShowSpanish(data.value);
+        },
+        LANG_MULTIPLE_WORDS_UPDATE_ATTEMPTS: (data) => {
+            this.scene.updateMultipleWordsAttempts(data.value);
+        },
+        LANG_MULTIPLE_WORDS_SHOW_ANSWER: (data) => {
+            this.scene.showMultipleWordsAnswer(data.value);
+        }
       };
       this.commands.LANG_START_ONE_PIC.bind(this);
+      this.commands.LANG_ONE_PIC_UPDATE_ATTEMPTS.bind(this);
+      this.commands.LANG_START_MULTIPLE_WORDS.bind(this);
       this.commands.LANG_ONE_PIC_SHOW_ENGLISH.bind(this);
+      this.commands.LANG_MULTIPLE_WORDS_SHOW_ENGLISH.bind(this);
       this.commands.LANG_ONE_PIC_SHOW_SPANISH.bind(this);
+      this.commands.LANG_MULTIPLE_WORDS_SHOW_SPANISH.bind(this);
       this.commands.LANG_MENU.bind(this);
     }
   

@@ -1,5 +1,6 @@
 import { Menu } from "./game/menu.js";
 import { OnePicOneWord } from "./game/one_pic_one_word.js";
+import { OnePicMultipleWords } from "./game/one_pic_multiple_words.js";
 
 window.addEventListener("load", () => {
     var navigator = new Navigator();
@@ -17,7 +18,8 @@ export class Navigator {
 export class Scene {
     game = document.getElementById("game");
     menu = new Menu();
-    question = new OnePicOneWord();
+    question = new OnePicMultipleWords();
+    onePicOneWord = new OnePicOneWord();
 
     constructor() {
         this.createBox();
@@ -26,12 +28,23 @@ export class Scene {
         var spanishWord = "Spanish : ";
         for (var i = 0; i < 8; i++) spanishWord += "_ ";
 
-        this.question.setWord(englishWord);
-        this.question.setSpanishWord(spanishWord);
-        this.question.setImageURL(
-            "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+        this.onePicOneWord.setImageURL(
+            "https://images.unsplash.com/photo-1595814304795-04e0ae903ae8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500"
         );
-        this.game.appendChild(this.question.getWord());
+        this.onePicOneWord.setWord("Hello", "ENGLISH");
+        this.onePicOneWord.setWord("Hola", "SPANISH");
+        this.onePicOneWord.setAttempts(10);
+        // this.question.setImageURL(
+        //     "https://images.unsplash.com/photo-1595814304795-04e0ae903ae8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500"
+        // );
+        // this.question.setWords(["hello world hello", "world", "sky"], "ENGLISH");
+        // this.question.setWords(["hola", "mundo", "cielo"], "SPANISH");
+
+        // this.question.setEnglishWord("word", 1)
+        // this.question.setSpanishWord(spanishWord);
+        this.game.appendChild(this.onePicOneWord.getQuestion());
+        // this.onePicOneWord.setWordValue("Hello", "spanish-word")
+        // this.question.setWord("hello", "english", 0);
     }
 
     createBox() {

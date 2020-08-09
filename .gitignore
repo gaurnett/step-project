@@ -69,3 +69,5 @@ node_modules/
 .firebaserc
 firebase.json
 sdk/webhooks/ActionsOnGoogleFulfillment/config.js
+public/mockup.html
+public/js/mockup.js

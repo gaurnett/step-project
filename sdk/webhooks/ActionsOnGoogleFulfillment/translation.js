@@ -19,6 +19,5 @@ exports.translateFunction = async function(word) {
 
     // Translates some text into Spanish
     const [translation] = await translate.translate(word, target);
-
     return translation;
 };
