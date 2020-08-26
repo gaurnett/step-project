@@ -12,17 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 onEnter:
-  webhookHandler: lang_start_multiple_words
+  webhookHandler: lang_conversation_welcome
 intentEvents:
+- handler:
+    webhookHandler: lang_conversation_response
+  intent: lang_conversation_response
+- handler:
+    webhookHandler: lang_conversation_translate
+  intent: lang_conversation_translate
+- handler:
+    webhookHandler: lang_conversation_search
+  intent: lang_conversation_search
+- handler:
+    webhookHandler: lang_conversation_article
+  intent: lang_conversation_article
+- handler:
+    webhookHandler: lang_conversation_article_translate
+  intent: lang_conversation_article_translate
+- handler:
+    webhookHandler: lang_conversation_help
+  intent: lang_conversation_help
 - handler:
     webhookHandler: lang_change_game
   intent: lang_change_game
   transitionToScene: lang_menu
-- handler:
-    webhookHandler: lang_multiple_words_answer
-  intent: lang_word
-- handler:
-    webhookHandler: lang_next_question
-  intent: lang_next_question
-  transitionToScene: lang_multiple_words
-  

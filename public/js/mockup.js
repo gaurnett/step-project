@@ -1,6 +1,8 @@
 import { Menu } from "./game/menu.js";
 import { OnePicOneWord } from "./game/one_pic_one_word.js";
 import { OnePicMultipleWords } from "./game/one_pic_multiple_words.js";
+import { Conversation } from "./game/conversation.js";
+import { Vocabulary } from "./game/vocab.js";
 
 window.addEventListener("load", () => {
     var navigator = new Navigator();
@@ -20,31 +22,28 @@ export class Scene {
     menu = new Menu();
     question = new OnePicMultipleWords();
     onePicOneWord = new OnePicOneWord();
+    conversation = new Conversation();
+    vocabulary = new Vocabulary();
 
     constructor() {
         this.createBox();
-        var englishWord = "English : ";
-        for (var i = 0; i < 5; i++) englishWord += "_ ";
-        var spanishWord = "Spanish : ";
-        for (var i = 0; i < 8; i++) spanishWord += "_ ";
 
-        this.onePicOneWord.setImageURL(
-            "https://images.unsplash.com/photo-1595814304795-04e0ae903ae8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500"
-        );
-        this.onePicOneWord.setWord("Hello", "ENGLISH");
-        this.onePicOneWord.setWord("Hola", "SPANISH");
-        this.onePicOneWord.setAttempts(10);
-        // this.question.setImageURL(
-        //     "https://images.unsplash.com/photo-1595814304795-04e0ae903ae8?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500"
-        // );
-        // this.question.setWords(["hello world hello", "world", "sky"], "ENGLISH");
-        // this.question.setWords(["hola", "mundo", "cielo"], "SPANISH");
-
-        // this.question.setEnglishWord("word", 1)
-        // this.question.setSpanishWord(spanishWord);
-        this.game.appendChild(this.onePicOneWord.getQuestion());
-        // this.onePicOneWord.setWordValue("Hello", "spanish-word")
-        // this.question.setWord("hello", "english", 0);
+        const words = [
+            {
+                english: "sky",
+                spanish: "cielo"
+            },
+            {
+                english: "blue",
+                spanish: "azul"
+            },
+            {
+                english: "house",
+                spanish: "casa"
+            }
+        ]
+        this.game.appendChild(this.vocabulary.getWords());
+        this.vocabulary.setWords(words)
     }
 
     createBox() {

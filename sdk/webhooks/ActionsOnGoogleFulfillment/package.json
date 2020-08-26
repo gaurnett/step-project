@@ -16,6 +16,7 @@
     "firebase-admin": "~8.12.1",
     "firebase-functions": "^3.6.2",
     "lorem-picsum": "^1.0.0",
+    "newsapi": "^2.4.1",
     "node-pexels": "0.0.5",
     "unsplash-js": "^6.0.0"
   }

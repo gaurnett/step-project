@@ -27,7 +27,7 @@ export class Action {
       this.scene = scene;
       this.commands = {
         LANG_MENU: (data) => {
-            this.scene.openMenu(data.value);
+            this.scene.langOpenLanguageMenu(data.value);
         },
         LANG_START_ONE_PIC: (data) => {
             this.scene.startOnePicOneWord(data.value);
@@ -40,6 +40,9 @@ export class Action {
         },
         LANG_ONE_PIC_UPDATE_ATTEMPTS: (data) => {
             this.scene.updateOnePicAttempts(data.value);
+        },
+        LANG_ONE_PIC_SHOW_HINT: (data) => {
+            this.scene.onePicShowHint(data.value);
         },
         LANG_ONE_PIC_SHOW_ANSWER: (data) => {
             this.scene.showOnePicAnswer(data.value);
@@ -58,15 +61,35 @@ export class Action {
         },
         LANG_MULTIPLE_WORDS_SHOW_ANSWER: (data) => {
             this.scene.showMultipleWordsAnswer(data.value);
+        },
+        LANG_START_CONVERSATION: (data) => {
+            this.scene.startConversation(data.value);
+        },
+        LANG_ADD_CONVERSATION_MESSAGE: (data) => {
+            this.scene.addConversationMessage(data.value);
+        },
+        LANG_ADD_CONVERSATION_SEARCH_MESSAGE: (data) => {
+            this.scene.addConversationSearchMessage(data.value);
+        },
+        LANG_VOCAB: (data) => {
+            this.scene.openVocab(data.value);
         }
       };
       this.commands.LANG_START_ONE_PIC.bind(this);
-      this.commands.LANG_ONE_PIC_UPDATE_ATTEMPTS.bind(this);
-      this.commands.LANG_START_MULTIPLE_WORDS.bind(this);
       this.commands.LANG_ONE_PIC_SHOW_ENGLISH.bind(this);
-      this.commands.LANG_MULTIPLE_WORDS_SHOW_ENGLISH.bind(this);
       this.commands.LANG_ONE_PIC_SHOW_SPANISH.bind(this);
+      this.commands.LANG_ONE_PIC_UPDATE_ATTEMPTS.bind(this);
+      this.commands.LANG_ONE_PIC_SHOW_HINT.bind(this);
+      this.commands.LANG_ONE_PIC_SHOW_ANSWER.bind(this);
+      this.commands.LANG_START_MULTIPLE_WORDS.bind(this);
+      this.commands.LANG_MULTIPLE_WORDS_SHOW_ENGLISH.bind(this);
       this.commands.LANG_MULTIPLE_WORDS_SHOW_SPANISH.bind(this);
+      this.commands.LANG_MULTIPLE_WORDS_SHOW_ANSWER.bind(this);
+      this.commands.LANG_MULTIPLE_WORDS_UPDATE_ATTEMPTS.bind(this);
+      this.commands.LANG_START_CONVERSATION.bind(this);
+      this.commands.LANG_ADD_CONVERSATION_MESSAGE.bind(this);
+      this.commands.LANG_ADD_CONVERSATION_SEARCH_MESSAGE.bind(this);
+      this.commands.LANG_VOCAB.bind(this);
       this.commands.LANG_MENU.bind(this);
     }
   

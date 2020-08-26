@@ -16,9 +16,7 @@ parameters:
   type:
     name: lang_words
 trainingPhrases:
-- ($lang_words 'ten' auto=true)
-- ($lang_words 'blue' auto=true)
-- ($lang_words 'road' auto=true)
-- ($lang_words 'car' auto=true)
-- ($lang_words 'house' auto=true)
-- ($lang_words 'pencil' auto=true)
+- tell me about ($lang_words 'the florida storm' auto=true)
+- what is the latest ($lang_words 'article about coronavirus' auto=true)
+- what is going on in ($lang_words 'California' auto=true)
+- news in ($lang_words 'Kingston Jamaica' auto=true)

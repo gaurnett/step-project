@@ -22,31 +22,6 @@ export class Menu {
     menu = document.createElement("div");
 
     constructor() {
-        // const view = document.getElementById("game");
-
-        // this.ratio = window.devicePixelRatio;
-        // const app = new PIXI.Application({ 
-        //     antialias: true,
-        //     resolution: this.ratio,
-        //     width: view.clientWidth,
-        //     height: view.clientHeight });
-        // view.appendChild(app.view);
-
-        // const graphics = new PIXI.Graphics();
-
-        // // Rectangle
-        // graphics.beginFill(0xde3249);
-        // graphics.drawRect((view.clientWidth / 2) - 300, (view.clientHeight / 2) - 200, 200, 200);
-        // graphics.endFill();
-
-        // // Circle
-        // graphics.lineStyle(0);
-        // graphics.beginFill(0xde3249, 1);
-        // graphics.drawCircle((view.clientWidth / 2) + 200, (view.clientHeight / 2) - 100, 100);
-        // graphics.endFill();
-
-        // app.stage.addChild(graphics);
-
         this.menu.id = "math-menu";
         this.menu.classList.add(
             "container",
@@ -60,6 +35,7 @@ export class Menu {
         menuRow.appendChild(this.createMenuElement("One Pic One Word"));
         menuRow.appendChild(this.createMenuElement("One Pic Multiple Words"));
         menuRow.appendChild(this.createMenuElement("Vocabulary"));
+        menuRow.appendChild(this.createMenuElement("Conversation"));
         this.menu.appendChild(menuRow);
     }
 
@@ -84,7 +60,7 @@ export class Menu {
         return menuCol;
     }
 
-    getMenu() {
+    getLanguageElement() {
         return this.menu;
     }
 }

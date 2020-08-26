@@ -12,13 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 parameters:
-- name: lang_words
+- name: article_number
   type:
-    name: lang_words
+    name: actions.type.Number
 trainingPhrases:
-- ($lang_words 'ten' auto=true)
-- ($lang_words 'blue' auto=true)
-- ($lang_words 'road' auto=true)
-- ($lang_words 'car' auto=true)
-- ($lang_words 'house' auto=true)
-- ($lang_words 'pencil' auto=true)
+- ($article_number '1' auto=true)
+- article ($article_number '4' auto=true)
+- show me article ($article_number '3' auto=true)
+- open article ($article_number '4' auto=true)

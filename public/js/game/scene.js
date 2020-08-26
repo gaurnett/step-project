@@ -17,20 +17,23 @@
 import { Menu } from "./menu.js";
 import { OnePicOneWord } from "./one_pic_one_word.js";
 import { OnePicMultipleWords } from "./one_pic_multiple_words.js";
+import { Conversation } from "./conversation.js";
+import { Vocabulary } from "./vocab.js";
 
 export class Scene {
-
     game = document.getElementById("game");
-    menu = new Menu();
+    language = new Menu();
     onePicOneWord = new OnePicOneWord();
     onePicMultipleWords = new OnePicMultipleWords();
+    conversation = new Conversation();
+    vocabulary = new Vocabulary();
 
     /**
      * Creates the background animation and loads the menu
      */
     constructor() {
         this.createAnimation();
-        this.game.appendChild(this.menu.getMenu());
+        this.game.appendChild(this.language.getLanguageElement());
     }
 
     /**
@@ -38,8 +41,8 @@ export class Scene {
      * @param {*} data stores the english word, image url and attempts left over
      */
     startOnePicOneWord(data) {
-        if (this.game.contains(this.menu.getMenu()))
-            this.game.removeChild(this.menu.getMenu());
+        if (this.game.contains(this.language.getLanguageElement()))
+            this.game.removeChild(this.language.getLanguageElement());
 
         const analysisWord = String(data.word);
         this.onePicOneWord.setImageURL(data.url);
@@ -58,6 +61,10 @@ export class Scene {
 
         this.onePicOneWord.showSpanishWord();
         this.onePicOneWord.setWord(data.spanish, "SPANISH");
+
+        if (data.attempts != undefined) {
+            this.onePicOneWord.setAttempts(data.attempts);
+        }
     }
 
     /**
@@ -65,9 +72,13 @@ export class Scene {
      * @param {*} data stores the spanish word
      */
     onePicOneWordShowSpanish(data) {
-        const translatedWord = String(data);
+        const translatedWord = String(data.word);
         this.onePicOneWord.showSpanishWord();
         this.onePicOneWord.setWordValue(translatedWord, "spanish-word");
+
+        if (data.attempts != undefined) {
+            this.onePicOneWord.setAttempts(data.attempts);
+        }
     }
 
     /**
@@ -76,6 +87,19 @@ export class Scene {
      */
     updateOnePicAttempts(data) {
         this.onePicOneWord.setAttempts(data);
+    }
+
+    /**
+     * Provides a hint to the user in the form of a letter
+     * @param {*} data stores the information to be updated on the screen
+     */
+    onePicShowHint(data) {
+        this.onePicOneWord.setAttempts(data.attempts);
+        if (data.scene == "lang_one_pic") {
+            this.onePicOneWord.setWordValue(data.word, "english-word");
+        } else if (data.scene == "lang_one_pic_translation") {
+            this.onePicOneWord.setWordValue(data.word, "spanish-word");
+        }
     }
 
     /**
@@ -94,8 +118,8 @@ export class Scene {
      * @param {*} data stores the url, words and attempts left over
      */
     startOnePicMultipleWords(data) {
-        if (this.game.contains(this.menu.getMenu()))
-            this.game.removeChild(this.menu.getMenu());
+        if (this.game.contains(this.language.getLanguageElement()))
+            this.game.removeChild(this.language.getLanguageElement());
 
         this.onePicMultipleWords.setImageURL(data.url);
         this.onePicMultipleWords.setWords(data.words, "ENGLISH");
@@ -107,7 +131,7 @@ export class Scene {
 
     /**
      * Shows the english word after the user guesses it correctly
-     * @param {*} data stores the correct english word and its index to be shown. 
+     * @param {*} data stores the correct english word and its index to be shown.
      * Also tells us if the user has guessed all english words so that the spanish
      * section can be shown.
      */
@@ -149,11 +173,61 @@ export class Scene {
     }
 
     /**
+     * Removes the menu and adds the conversation element
+     * @param {*} data stores the message information to be shown at the start
+     */
+    startConversation(data) {
+        if (this.game.contains(this.language.getLanguageElement()))
+            this.game.removeChild(this.language.getLanguageElement());
+
+        this.game.appendChild(this.conversation.getConversation());
+        this.conversation.appendMessage(data.sender, data.text);
+    }
+
+    /**
+     * Adds a regular message to the conversation
+     * @param {*} data stores the message information to be shown 
+     */
+    addConversationMessage(data) {
+        this.conversation.appendMessage(
+            false,
+            data.receiverMessage,
+            data.receiverImage
+        );
+        this.conversation.appendMessage(true, data.senderMessage);
+    }
+
+    /**
+     * Adds a what the user has searched to the conversation
+     * @param {*} data stores the message information to be shown 
+     */
+    addConversationSearchMessage(data) {
+        this.conversation.appendMessage(
+            false,
+            data.receiverMessage,
+            data.receiverImage
+        );
+        this.conversation.appendSearchMessage(data.results, data.senderMessage);
+    }
+
+    /**
+     * Opens the list of words that the user has translated
+     * @param {*} data stores the words to be shown
+     */
+    openVocab(data) {
+        if (this.game.contains(this.language.getLanguageElement()))
+            this.game.removeChild(this.language.getLanguageElement());
+
+        this.game.appendChild(this.vocabulary.getWords());
+        this.vocabulary.setWords(data);
+    }
+
+    /**
      * Returns to the main menu from the current game session
-     * @param {*} scene so that the correct session can be removed before 
+     * @param {*} scene so that the correct session can be removed before
      * showing the menu
      */
-    openMenu(scene) {
+    langOpenLanguageMenu(scene) {
         if (scene == "lang_one_pic" || scene == "lang_one_pic_translation") {
             this.game.removeChild(this.onePicOneWord.getQuestion());
         } else if (
@@ -161,8 +235,12 @@ export class Scene {
             scene == "lang_multiple_words_translation"
         ) {
             this.game.removeChild(this.onePicMultipleWords.getQuestion());
+        } else if (scene == "lang_conversation") {
+            this.game.removeChild(this.conversation.getConversation());
+        } else if (scene == "lang_vocab") {
+            this.game.removeChild(this.vocabulary.getWords());
         }
-        this.game.appendChild(this.menu.getMenu());
+        this.game.appendChild(this.language.getLanguageElement());
     }
 
     /**
@@ -221,7 +299,7 @@ export class Scene {
     }
 
     /**
-     * 
+     *
      * @param {*} type of shape to be drawn
      * @param {*} color of the shape's fill
      * @param {*} x coordinate of the shape

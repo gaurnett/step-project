@@ -11,14 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-parameters:
-- name: lang_words
-  type:
-    name: lang_words
 trainingPhrases:
-- ($lang_words 'ten' auto=true)
-- ($lang_words 'blue' auto=true)
-- ($lang_words 'road' auto=true)
-- ($lang_words 'car' auto=true)
-- ($lang_words 'house' auto=true)
-- ($lang_words 'pencil' auto=true)
+- start conversation game
+- start conversation
+- conversation
+- game 4
+- game four

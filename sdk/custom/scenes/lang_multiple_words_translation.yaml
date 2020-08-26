@@ -17,7 +17,7 @@ intentEvents:
   intent: lang_change_game
   transitionToScene: lang_menu
 - handler:
-    webhookHandler: lang_word_translation
+    webhookHandler: lang_multiple_words_answer_translation
   intent: lang_word
   transitionToScene: lang_multiple_words_translation
 - handler:

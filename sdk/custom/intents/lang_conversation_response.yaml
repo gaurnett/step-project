@@ -16,9 +16,10 @@ parameters:
   type:
     name: lang_words
 trainingPhrases:
-- ($lang_words 'ten' auto=true)
-- ($lang_words 'blue' auto=true)
-- ($lang_words 'road' auto=true)
-- ($lang_words 'car' auto=true)
-- ($lang_words 'house' auto=true)
-- ($lang_words 'pencil' auto=true)
+- estoy ($lang_words 'estupendo' auto=true) gracias
+- ($lang_words 'estupendo' auto=true) gracias
+- estoy ($lang_words 'muy bien' auto=true)
+- ($lang_words 'mal' auto=true)
+- ($lang_words 'fatal' auto=true)
+- ($lang_words 'exhausto' auto=true)
+- ($lang_words 'así así' auto=true)

@@ -16,9 +16,9 @@ parameters:
   type:
     name: lang_words
 trainingPhrases:
-- ($lang_words 'ten' auto=true)
-- ($lang_words 'blue' auto=true)
-- ($lang_words 'road' auto=true)
-- ($lang_words 'car' auto=true)
-- ($lang_words 'house' auto=true)
-- ($lang_words 'pencil' auto=true)
+- translate the word ($lang_words 'estupendo' auto=true)
+- translate the phrase ($lang_words 'estupendo' auto=true)
+- translate this sentence ($lang_words 'estupendo' auto=true)
+- what is the english word for ($lang_words 'estupendo' auto=true)
+- translate this phrase ($lang_words 'Mis pasatiempos son jugar futbol y videojuegos' auto=true)
+- translate this phrase to english ($lang_words 'Mis pasatiempos son jugar futbol y videojuegos' auto=true)

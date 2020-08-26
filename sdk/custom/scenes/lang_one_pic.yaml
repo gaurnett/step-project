@@ -19,7 +19,7 @@ intentEvents:
   intent: lang_change_game
   transitionToScene: lang_menu
 - handler:
-    webhookHandler: lang_word
+    webhookHandler: lang_one_pic_answer
   intent: lang_word
 - handler:
     webhookHandler: lang_next_question
